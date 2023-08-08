@@ -1,3 +1,4 @@
+"use client";
 import { BiSearch } from "react-icons/bi";
 
 const Search = () => {
@@ -10,7 +11,7 @@ const Search = () => {
         </div>
         <div className=" px-6 flex flex-row items-center gap-3">
           <div className="hidden sm:block ">Search</div>
-          <div className="p-2 bg-rose-500 rounded-full">
+          <div className="p-2 bg-blue-400 rounded-full">
             <BiSearch></BiSearch>
           </div>
         </div>
