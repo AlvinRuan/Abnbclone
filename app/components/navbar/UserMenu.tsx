@@ -3,13 +3,26 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 import React, { useState } from "react";
+import RegisterModal from "./RegisterModal";
 
 const UserMenu = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [registerModal, setRegisterModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
 
   const openMenuClicked = () => {
     setOpenMenu(!openMenu);
-    console.log("clicked!", openMenu);
+    console.log("clicked openMenu!", openMenu);
+  };
+
+  const registerModalClicked = () => {
+    setRegisterModal(!registerModal);
+    console.log("clicked register!!!", registerModal);
+  };
+
+  const loginModalClicked = () => {
+    setLoginModal(!loginModal);
+    console.log("clicked login", loginModal);
   };
 
   return (
@@ -33,8 +46,18 @@ const UserMenu = () => {
         <div className="">
           <div className="flex flex-col cursor-pointer absolute rounded-xl right-0 shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden top-12 text-sm">
             <>
-              <MenuItem onClick={() => {}} label="Login" />
-              <MenuItem onClick={() => {}} label="Sign Up!" />
+              <MenuItem
+                onClick={() => {
+                  loginModalClicked();
+                }}
+                label="Login"
+              />
+              <MenuItem
+                onClick={() => {
+                  registerModalClicked();
+                }}
+                label="Sign Up!"
+              />
             </>
           </div>
         </div>
