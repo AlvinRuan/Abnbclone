@@ -27,12 +27,19 @@ const UserMenu = () => {
 
   return (
     <div className="relative">
-      {registerModal && (
-        <RegisterModal
-          registerState={registerModal}
-          registerStateFunc={setRegisterModal}
-        />
-      )}
+      <div
+        className={`h-full duration-500 translate  ${
+          registerModal ? "opacity-100" : "opacity-0"
+        } `}
+      >
+        {registerModal && (
+          <RegisterModal
+            registerState={registerModal}
+            registerStateFunc={setRegisterModal}
+          />
+        )}
+      </div>
+
       <div className="flex flex-row items-center gap-3">
         <div className="hidden md:block text-sm py-3 px-4 rounded-full hover: bg-white transition cursor-pointer">
           Rent Out Your Home
