@@ -22,7 +22,7 @@ const UserMenu = () => {
 
   const loginModalClicked = () => {
     setLoginModal(!loginModal);
-    console.log("clicked login", loginModal);
+    console.log("clicked login!!", loginModal);
   };
 
   return (
