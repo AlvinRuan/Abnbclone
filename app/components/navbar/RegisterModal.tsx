@@ -10,8 +10,8 @@ interface RegisterModalProps {
 }
 
 interface FormData {
-  email: string;
-  name: string;
+  email_address: string;
+  user_name: string;
   password: string;
 }
 
@@ -20,8 +20,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
   registerStateFunc,
 }) => {
   const [formData, setFormData] = useState({
-    email: "",
-    name: "",
+    email_address: "",
+    user_name: "",
     password: "",
   });
 
@@ -40,13 +40,15 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
   };
 
   const SubmitHandler = (data: FormData) => {
+    console.log("data!!!", data);
     axios
       .post("/api/register", data)
       .then(() => {
         registerStateFunc(!registerState);
+        console.log("Successfully imported", data.user_name);
       })
-      .catch(() => {
-        console.log("ERROR!!!");
+      .catch((err) => {
+        console.log("ERROR!!!", err);
         registerStateFunc(!registerState);
       });
   };
@@ -66,19 +68,19 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
             <div className="text-neutral-400">Create an account!</div>
             <form onSubmit={handleSubmit} className=" flex flex-col gap-4">
               <input
-                name="email"
+                name="email_address"
                 type="email"
-                value={formData.email}
+                value={formData.email_address}
                 onChange={handleInputChange}
                 className="border-[1px] focus:border-blue-500 p-4 rounded-lg "
                 placeholder="Email"
               ></input>
               <input
-                name="name"
+                name="user_name"
                 className="p-4 rounded-lg border-[1px]"
                 placeholder="Name"
                 onChange={handleInputChange}
-                value={formData.name}
+                value={formData.user_name}
               ></input>
               <input
                 name="password"

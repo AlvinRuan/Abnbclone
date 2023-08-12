@@ -22,8 +22,8 @@ model User {
   favoriteIds String[] @db.ObjectId
 
   accounts Account[]
-  // listings Listing[]
-  // reservations Reservation[]
+  listings Listing[]
+  reservation Reservation[]
 }
 
 model Account {
@@ -34,13 +34,44 @@ model Account {
   providerAccountID String
   refresh_token String? @db.String
   access_token String? @db.String
-  expires_at Int?
+  expires_t Int?
   token_type String?
   scope String?
   id_token String? @db.String
   session_state String?
 
   user User @relation(fields:[userID], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountID])
 }
 
-// 1:46:11
+model Listing {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String
+  imageSource String
+  createdAt DateTime @default(now())
+  category String
+  room_Count Int
+  bathroom_Count Int
+  guest_Count Int
+  price Int
+  location String
+  userId String @db.ObjectId
+  
+  user User @relation(fields:[userId], references: [id], onDelete:Cascade)
+  reservations Reservation[]
+}
+
+model Reservation {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  listingId String @db.ObjectId
+  startDate DateTime
+  endDate DateTime
+  totalPrice Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields:[userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields:[listingId], references: [id], onDelete: Cascade)
+}
