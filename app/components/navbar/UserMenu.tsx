@@ -4,10 +4,11 @@ import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 import React, { useState } from "react";
 import RegisterModal from "./RegisterModal";
+import LoginModal from "./LoginModal";
 
 const UserMenu = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const [registerModal, setRegisterModal] = useState(true);
+  const [registerModal, setRegisterModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
 
   const openMenuClicked = () => {
@@ -28,15 +29,18 @@ const UserMenu = () => {
   return (
     <div className="relative">
       <div
-        className={`h-full duration-500 translate  ${
+        className={`h-full duration-500 translate ${
           registerModal ? "opacity-100" : "opacity-0"
-        } `}
+        } ${loginModal ? "opacity-100" : "opacity-0"}`}
       >
         {registerModal && (
           <RegisterModal
             registerState={registerModal}
             registerStateFunc={setRegisterModal}
           />
+        )}
+        {loginModal && (
+          <LoginModal loginState={loginModal} loginStateFunc={setLoginModal} />
         )}
       </div>
 

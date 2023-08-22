@@ -3,17 +3,16 @@ import bcrypt from "bcrypt";
 
 import prisma from "@/app/libs/prismadb";
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextResponse) {
   const body = await request.json();
-  const { email_address, user_name, password } = body;
+  const { email_address, password } = body;
 
   // encrypt password
   const hashedPassword = await bcrypt.hash(password, 12);
 
-  const user = await prisma.user.create({
-    data: {
+  const user = await prisma.user.findUnique({
+    where: {
       email_address,
-      user_name,
       hashedPassword,
     },
   });
